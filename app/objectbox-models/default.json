@@ -1,0 +1,610 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:142521365678273280",
+      "lastPropertyId": "13:8846514913505696601",
+      "name": "Item",
+      "properties": [
+        {
+          "id": "1:240654481336285189",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2106910284527448725",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:2522826250803689468",
+          "name": "marketCost",
+          "type": 5
+        },
+        {
+          "id": "4:6343027942255047683",
+          "name": "craftCost",
+          "type": 5
+        },
+        {
+          "id": "5:404003719064233050",
+          "name": "casterLevel",
+          "type": 5
+        },
+        {
+          "id": "6:6553851379010106843",
+          "name": "aura",
+          "type": 9
+        },
+        {
+          "id": "7:6911606578859859046",
+          "name": "weight",
+          "type": 7
+        },
+        {
+          "id": "8:8528208765767530177",
+          "name": "slot",
+          "type": 5
+        },
+        {
+          "id": "9:5103348569160515212",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "10:5471637907711272258",
+          "name": "itemType",
+          "type": 5
+        },
+        {
+          "id": "11:4006040640933704017",
+          "name": "requirementsId",
+          "indexId": "1:2110524638806028119",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Requirement"
+        },
+        {
+          "id": "12:4226513902085245719",
+          "name": "baseCraftTime",
+          "type": 5
+        },
+        {
+          "id": "13:8846514913505696601",
+          "name": "temporary",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:9179566386235509472",
+      "lastPropertyId": "20:3030368600434973985",
+      "name": "CraftingProcess",
+      "properties": [
+        {
+          "id": "1:4849426288768742190",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6631001555294553384",
+          "name": "finalCost",
+          "type": 5
+        },
+        {
+          "id": "3:4999196716702709208",
+          "name": "finalTime",
+          "type": 5
+        },
+        {
+          "id": "4:7028164563088797826",
+          "name": "finalDifficultClass",
+          "type": 5
+        },
+        {
+          "id": "5:4506586312084361000",
+          "name": "timeSpent",
+          "type": 5
+        },
+        {
+          "id": "6:7565560296333227602",
+          "name": "moneyCrafted",
+          "type": 5
+        },
+        {
+          "id": "8:2950374277607566187",
+          "name": "itemId",
+          "indexId": "7:8104751637589324734",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Item"
+        },
+        {
+          "id": "9:1649932745366814317",
+          "name": "masterwork",
+          "type": 1
+        },
+        {
+          "id": "10:3114871667360525354",
+          "name": "coopCraftingParts",
+          "type": 5
+        },
+        {
+          "id": "11:3965210295317542153",
+          "name": "acceleratedCrafting",
+          "type": 1
+        },
+        {
+          "id": "12:2351312577891759719",
+          "name": "fcb",
+          "type": 5
+        },
+        {
+          "id": "13:8451433923680384300",
+          "name": "discountTrait",
+          "type": 1
+        },
+        {
+          "id": "14:454420851801347853",
+          "name": "ignoredSkills",
+          "type": 30
+        },
+        {
+          "id": "15:6781972104010460604",
+          "name": "ignoredFeats",
+          "type": 30
+        },
+        {
+          "id": "16:4284163820845634489",
+          "name": "ignoredSpells",
+          "type": 30
+        },
+        {
+          "id": "17:6435820222728508734",
+          "name": "ignoredSpecial",
+          "type": 1
+        },
+        {
+          "id": "18:4370262553428487488",
+          "name": "ignoredCasterLevel",
+          "type": 1
+        },
+        {
+          "id": "19:5551144573656820625",
+          "name": "masterworkCrafted",
+          "type": 5
+        },
+        {
+          "id": "20:3030368600434973985",
+          "name": "mustPayed",
+          "type": 5
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:8915578993790071044",
+          "name": "itemModifications",
+          "targetId": "4:2550799611045711336"
+        },
+        {
+          "id": "2:4321870699065211092",
+          "name": "template",
+          "targetId": "8:3860955978127649647"
+        },
+        {
+          "id": "7:3887492299473286311",
+          "name": "ignoredAlternativeChoices",
+          "targetId": "12:952247723657509672"
+        }
+      ]
+    },
+    {
+      "id": "3:9132277240580982198",
+      "lastPropertyId": "3:8147849848906246975",
+      "name": "Feat",
+      "properties": [
+        {
+          "id": "1:3453953291038989315",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6668795866548111088",
+          "name": "name",
+          "indexId": "5:8110567779997333473",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:8147849848906246975",
+          "name": "description",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:2550799611045711336",
+      "lastPropertyId": "16:4349837822783089204",
+      "name": "ItemModification",
+      "properties": [
+        {
+          "id": "1:7954780535005857936",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1628610691625798309",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:1305941348719770684",
+          "name": "costMod",
+          "type": 7
+        },
+        {
+          "id": "5:4953551108740964494",
+          "name": "isPerLbs",
+          "type": 1
+        },
+        {
+          "id": "6:3042320203036991988",
+          "name": "isMasterworkIncluded",
+          "type": 1
+        },
+        {
+          "id": "7:1548072216029758744",
+          "name": "itemTypeToCost",
+          "type": 13
+        },
+        {
+          "id": "9:6261145482802558105",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "10:6412244938651757737",
+          "name": "weightMod",
+          "type": 7
+        },
+        {
+          "id": "11:2107511512590181579",
+          "name": "craftProcessMod",
+          "type": 7
+        },
+        {
+          "id": "12:7843818779116536339",
+          "name": "casterLevelMod",
+          "type": 5
+        },
+        {
+          "id": "13:9106478199154652565",
+          "name": "difficultClassMod",
+          "type": 5
+        },
+        {
+          "id": "14:5790501402996392867",
+          "name": "isFlatCostMod",
+          "type": 1
+        },
+        {
+          "id": "15:8476783482254687548",
+          "name": "isFlatWeightMod",
+          "type": 1
+        },
+        {
+          "id": "16:4349837822783089204",
+          "name": "requirementsId",
+          "indexId": "9:417840797416514308",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Requirement"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:3655908617102866606",
+      "lastPropertyId": "5:1668847311267748583",
+      "name": "ModificatorItem",
+      "properties": [
+        {
+          "id": "1:9072041450762102123",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2893389207833405200",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:2357839059841032639",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "4:8396524821489966487",
+          "name": "costMod",
+          "type": 7
+        },
+        {
+          "id": "5:1668847311267748583",
+          "name": "timeMod",
+          "type": 7
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:4297057868477598614",
+      "lastPropertyId": "9:199928763676929702",
+      "name": "Requirement",
+      "properties": [
+        {
+          "id": "1:588482491485360826",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8859620339239776838",
+          "name": "casterLevel",
+          "type": 5
+        },
+        {
+          "id": "3:4180731157443171784",
+          "name": "addPrep",
+          "type": 9
+        },
+        {
+          "id": "4:5451027446987552402",
+          "name": "skills",
+          "type": 9
+        },
+        {
+          "id": "5:7083466725345652637",
+          "name": "craftSkill",
+          "type": 9
+        },
+        {
+          "id": "6:1445703220934631448",
+          "name": "difficultClass",
+          "type": 5
+        },
+        {
+          "id": "7:3236499337982507903",
+          "name": "spells",
+          "type": 30
+        },
+        {
+          "id": "9:199928763676929702",
+          "name": "feats",
+          "type": 30
+        }
+      ],
+      "relations": [
+        {
+          "id": "6:7821758628233062247",
+          "name": "alternativeChoice",
+          "targetId": "12:952247723657509672"
+        }
+      ]
+    },
+    {
+      "id": "7:26861391978805745",
+      "lastPropertyId": "3:2065177188092184590",
+      "name": "Spell",
+      "properties": [
+        {
+          "id": "1:6850973015760609144",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7952312193441240430",
+          "name": "name",
+          "indexId": "6:3581308623083177994",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:2065177188092184590",
+          "name": "description",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:3860955978127649647",
+      "lastPropertyId": "5:2935940597533330169",
+      "name": "Template",
+      "properties": [
+        {
+          "id": "1:7806370407891091631",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1515853564451314669",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:1323738988815124865",
+          "name": "costMod",
+          "type": 7
+        },
+        {
+          "id": "4:8603238047675483941",
+          "name": "dcMod",
+          "type": 5
+        },
+        {
+          "id": "5:2935940597533330169",
+          "name": "requirementsId",
+          "indexId": "3:5127530804723427977",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Requirement"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "9:4833888380243926892",
+      "lastPropertyId": "2:8942340668472109749",
+      "name": "Changeset",
+      "properties": [
+        {
+          "id": "1:4771847030331472354",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8942340668472109749",
+          "name": "changeset",
+          "indexId": "4:349316675241082013",
+          "type": 9,
+          "flags": 2080
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "10:8260927719638645367",
+      "lastPropertyId": "1:2267422339154093804",
+      "name": "AlternativeSpells",
+      "properties": [
+        {
+          "id": "1:2267422339154093804",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        }
+      ],
+      "relations": [
+        {
+          "id": "5:1596690470501534726",
+          "name": "alternativeChoice",
+          "targetId": "7:26861391978805745"
+        }
+      ]
+    },
+    {
+      "id": "11:7949274631663371284",
+      "lastPropertyId": "10:1946541169974551912",
+      "name": "Enchant",
+      "properties": [
+        {
+          "id": "1:4362556825201550769",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:216895474970133762",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:4431483701721413626",
+          "name": "marketCost",
+          "type": 5
+        },
+        {
+          "id": "4:8929480873876871524",
+          "name": "craftCost",
+          "type": 5
+        },
+        {
+          "id": "5:4480108320992095069",
+          "name": "enchantmentsPrice",
+          "type": 5
+        },
+        {
+          "id": "6:5589058725430637135",
+          "name": "casterLevel",
+          "type": 5
+        },
+        {
+          "id": "7:7556590706790094307",
+          "name": "aura",
+          "type": 9
+        },
+        {
+          "id": "8:4304766168148454216",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "9:9101544272603365227",
+          "name": "type",
+          "type": 5
+        },
+        {
+          "id": "10:1946541169974551912",
+          "name": "requirementsId",
+          "indexId": "8:6775365634842154895",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Requirement"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "12:952247723657509672",
+      "lastPropertyId": "2:2609486597036532272",
+      "name": "AlternativeChoice",
+      "properties": [
+        {
+          "id": "1:8410082294235705676",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2609486597036532272",
+          "name": "choice",
+          "type": 30
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "12:952247723657509672",
+  "lastIndexId": "9:417840797416514308",
+  "lastRelationId": "7:3887492299473286311",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [
+    4807782968621368136
+  ],
+  "retiredPropertyUids": [
+    8210562612115124113,
+    7112252453563861617,
+    5637849422797679067,
+    1035689968892716804
+  ],
+  "retiredRelationUids": [
+    2412553242508539251,
+    2808145979797612943
+  ],
+  "version": 1
+}
