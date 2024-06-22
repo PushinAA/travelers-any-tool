@@ -25,7 +25,8 @@ class ChangesetService: KoinComponent {
     private val changesetBox: Box<Changeset> = ObjectBox.store.boxFor()
 
     fun applyAll(resources: Resources) {
-        changesetBox.removeAll()
+        //ObjectBox.store.removeAllObjects()
+        //changesetBox.removeAll()
         applyChangesets<Feat>(resources, R.raw.init_feats, true)
         // TODO включить после доработки заклов
         //applyChangesets<Spell>(resources, R.raw.init_spells)
@@ -44,9 +45,9 @@ class ChangesetService: KoinComponent {
             .readValue<List<ChangesetEntry<T>>>(resources.openRawResource(resourceId))
         val box: Box<T> = ObjectBox.store.boxFor()
         // TODO выпилить
-        if (clean) {
-            box.removeAll()
-        }
+//        if (clean) {
+//            box.removeAll()
+//        }
         ObjectBox.store.runInTx {
             changesets.forEach {
                 val executed = changesetBox

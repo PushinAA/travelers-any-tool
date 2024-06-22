@@ -40,6 +40,8 @@ class ItemServiceMock: ItemService, KoinComponent {
             .toList()
     }
 
+    override fun delete(item: Item) {}
+
     private fun getMagicItem(): Item {
         val item = Item(
             name = "Traveler’s Any-Tool",

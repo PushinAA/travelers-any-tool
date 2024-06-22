@@ -11,6 +11,7 @@ class ItemServiceImpl: ItemService, KoinComponent {
 
     override fun findAll(): List<Item> = itemBox
         .query()
+        .equal(Item_.temporary, false)
         .order(Item_.name)
         .build()
         .findLazyCached()
@@ -22,8 +23,18 @@ class ItemServiceImpl: ItemService, KoinComponent {
     override fun findFiltered(filter: ItemFilter): List<Item> {
         val queryBuilder = itemBox.query()
         if (filter.name.isNotBlank()) {
-            queryBuilder.apply(Item_.name.contains(filter.name))
+            queryBuilder
+                .apply(Item_.name.contains(filter.name))
         }
-        return queryBuilder.build().findLazyCached()
+        queryBuilder
+            .apply(Item_.itemType.oneOf(filter.types.map { it.ordinal }.toIntArray()))
+        return queryBuilder
+            .equal(Item_.temporary, false)
+            .build()
+            .findLazyCached()
+    }
+
+    override fun delete(item: Item) {
+        itemBox.remove(item.id)
     }
 }

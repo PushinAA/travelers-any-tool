@@ -57,15 +57,6 @@ fun StartingPage(
                 ) {
                     Text(text = "Craft list", fontSize = 17.sp)
                 }
-                Button(
-                    onClick = { navController.navigate(AdminRoutes.Admin.route) },
-                    shape = RoundedCornerShape(10.dp),
-                    modifier = Modifier
-                        .width(150.dp)
-                        .height(40.dp)
-                ) {
-                    Text(text = "Admin menu", fontSize = 17.sp)
-                }
             }
         }
     }

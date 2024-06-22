@@ -18,6 +18,7 @@ import kotlin.math.ceil
 import kotlin.math.min
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
+import kotlin.time.times
 import kotlin.time.toDuration
 
 fun Int.toCostString(): String {
@@ -64,10 +65,12 @@ fun Item.modifiedCraftTimeString(
     mod: ItemModification?,
     dcForIgnoredPreqs: Int,
     coopCraftParts: Int,
-    fcb: Int
+    fcb: Int,
+    strMod: Int = 0,
+    count: Int = 1
 ): String {
-    val difficultClass = difficultClass(masterwork, mod, dcForIgnoredPreqs)
-    val marketCost = modifiedMarketCost(mod, masterwork).toDouble()
+    val difficultClass = difficultClass(masterwork, mod, dcForIgnoredPreqs, strMod)
+    val marketCost = modifiedMarketCost(mod, masterwork, strMod, count).toDouble()
     val craftDays = if (itemType.isMundane) {
         mundaneCraftBaseTimeDays(
             difficultClass,
@@ -100,33 +103,38 @@ fun Item.craftCost(): Int {
 
 fun Item.modifiedMarketCost(
     mod: ItemModification?,
-    masterwork: Boolean
+    masterwork: Boolean,
+    strMod: Int = 0,
+    count: Int = 1
 ): Int {
+    val base = (marketCost + marketCost.times(strMod)).times(count)
     return if (mod == null) {
-        marketCost
+        base
     } else {
         val cost = mod.itemTypeToCost[itemType.name]
         when {
-            mod.isFlatCostMod -> {
-                marketCost + if (cost.isNullOrBlank()) mod.costMod.toInt() else cost.toInt()
-            }
             mod.isPerLbs -> {
-                marketCost + (if (cost.isNullOrBlank()) mod.costMod else cost.toInt() * weight)
+                base + (if (cost.isNullOrBlank()) mod.costMod else cost.toInt() * weight)
                     .toInt()
             }
+            mod.isFlatCostMod -> {
+                base + if (cost.isNullOrBlank()) mod.costMod.toInt() else cost.toInt()
+            }
             else -> {
-                (marketCost * if (cost.isNullOrBlank()) mod.costMod else cost.toFloat()).toInt()
+                (base * if (cost.isNullOrBlank()) mod.costMod else cost.toFloat()).toInt()
             }
         }
-    } + if (masterwork && mod?.isMasterworkIncluded != true) itemType.masterworkCost else 0
+    } + if (masterwork) itemType.masterworkCost else 0
 }
 
 fun Item.modifiedCraftCost(
     mod: ItemModification?,
     discount: Boolean,
-    masterwork: Boolean
+    masterwork: Boolean,
+    strMod: Int = 0,
+    count: Int = 1
 ): Int {
-    val modifiedMarketCost = modifiedMarketCost(mod, masterwork)
+    val modifiedMarketCost = modifiedMarketCost(mod, masterwork, strMod, count)
     return when {
         itemType.isMundane -> {
             modifiedMarketCost / 3
@@ -174,20 +182,23 @@ fun Item.difficultClassString(): String = "${difficultClass()} ${craftingSkill()
 fun Item.difficultClass(
     masterwork: Boolean,
     mod: ItemModification?,
-    dcForIgnoredPreqs: Int
+    dcForIgnoredPreqs: Int,
+    strMod: Int = 0
 ): Int {
     val baseDifficultClass = difficultClass()
     return baseDifficultClass +
             dcForIgnoredPreqs +
             (mod?.difficultClassMod ?: 0) +
+            (strMod.times(2)) +
             if (itemType == ItemType.SIEGE_ENGINE && masterwork) 5 else 0
 }
 
 fun Item.modifiedDifficultClassString(
     masterwork: Boolean,
     mod: ItemModification?,
-    dcForIgnoredPreqs: Int
-): String = "${difficultClass(masterwork, mod, dcForIgnoredPreqs)} ${craftingSkill()}"
+    dcForIgnoredPreqs: Int,
+    strMod: Int = 0
+): String = "${difficultClass(masterwork, mod, dcForIgnoredPreqs, strMod)} ${craftingSkill()}"
 
 fun calculateDifficultClassForIgnoredPreqs(
     ignoredSkills: List<String>,
@@ -295,8 +306,17 @@ fun CraftingProcess.doCraft(
         100000.0
             .times(if (accelerated) 2 else 1)
             .div(8)
-            .times(if (byHours) hoursSpent else daysSpent * 24)
-    }.div(if (adventuring && !byHours) 4 else 1).toInt()
+            .times(if (byHours) hoursSpent else daysSpent * 8)
+    }.div(
+        if (adventuring) {
+            when (byHours) {
+                true -> 2
+                false -> 4
+            }
+        } else {
+            1
+        }
+    ).toInt()
     moneyCrafted = min(finalCost, moneyCrafted + progress)
     timeSpent += if (byHours) {
         hoursSpent
@@ -317,7 +337,9 @@ fun Int.acceleratedDc(itemType: ItemType, accelerated: Boolean) = this
 
 fun CraftingProcess.doCraftMasterworkComponents(
     checkResult: Int = 0,
-    daysSpent: Int = 1
+    daysSpent: Int = 1,
+    adventuring: Boolean,
+    byHours: Boolean
 ) {
     if (checkResult < item.target.itemType.masterworkDc) {
         timeSpent += daysSpent
@@ -328,6 +350,16 @@ fun CraftingProcess.doCraftMasterworkComponents(
         .div(7)
         .times(daysSpent)
         .times(10)
+        .div(
+            if (adventuring) {
+                when (byHours) {
+                    true -> 2
+                    false -> 4
+                }
+            } else {
+                1
+            }
+        )
         .toInt()
     masterworkCrafted = min(item.target.itemType.masterworkCost, masterworkCrafted + progress)
     timeSpent += daysSpent
@@ -341,7 +373,8 @@ fun ItemType.createTempItem(): Item {
             ItemType.POTION -> "Some potion"
             else -> "Some item"
         },
-        itemType = this
+        itemType = this,
+        temporary = true
     )
     val reqs = Requirement(
         feats = baseFeats
@@ -377,7 +410,7 @@ fun calcFinalCraftTime(
     coopCraftParts: Int,
     fcb: Int
 ): String {
-    val cost = calcFinalCraftCost(itemType, spellLevel, casterLevel, discount)
+    val cost = calcFinalCraftCost(itemType, spellLevel, casterLevel, discount).times(2)
     if ((itemType == ItemType.POTION || itemType == ItemType.SCROLL) && cost <= 25000) {
         return "2 hours"
     }

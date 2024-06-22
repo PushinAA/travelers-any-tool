@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:142521365678273280",
-      "lastPropertyId": "12:4226513902085245719",
+      "lastPropertyId": "13:8846514913505696601",
       "name": "Item",
       "properties": [
         {
@@ -71,6 +71,11 @@
           "id": "12:4226513902085245719",
           "name": "baseCraftTime",
           "type": 5
+        },
+        {
+          "id": "13:8846514913505696601",
+          "name": "temporary",
+          "type": 1
         }
       ],
       "relations": []

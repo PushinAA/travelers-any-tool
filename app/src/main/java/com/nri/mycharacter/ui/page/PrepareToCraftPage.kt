@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import androidx.navigation.compose.rememberNavController
 import com.nri.mycharacter.entity.Item
 import com.nri.mycharacter.entity.ItemType
@@ -97,11 +98,18 @@ fun PrepareToCraftPage(itemId: Long, navHostController: NavHostController) {
         onClick = {
             val process = viewModel.collect(item)
             processService.save(process)
-            navHostController.navigate(MainAppRoutes.CraftingProcess.route)
+            navHostController.navigate(
+                MainAppRoutes.CraftingProcess.route,
+                NavOptions.Builder()
+                    .setPopUpTo(
+                        route = MainAppRoutes.StartingPage.route,
+                        inclusive = false
+                    ).build()
+            )
         },
         modifier = Modifier
             .requiredSize(170.dp, 50.dp)
-            .absoluteOffset(y = 350.dp)
+            .absoluteOffset(y = 320.dp)
     )
 }
 
@@ -171,6 +179,8 @@ fun ItemModificationsBlock(
     val itemModService = koinInject<ItemModificationService>()
     val openBlock = remember { mutableStateOf(true) }
     val masterwork = viewModel.masterwork.collectAsState()
+    val strMod = viewModel.strMod.collectAsState()
+    val count = viewModel.count.collectAsState()
     val modification = viewModel.modification.collectAsState()
     Column(
         modifier = Modifier.padding(start = 5.dp)
@@ -201,6 +211,26 @@ fun ItemModificationsBlock(
                 style = typography.bodyLarge
             ) {
                 viewModel.updateMasterwork(it)
+            }
+            if (viewModel.itemsWithStrMod.contains(item.name)) {
+                CounterWithText(
+                    counter = strMod.value,
+                    text = "Strength rating",
+                    onInc = { viewModel.incStrMod() },
+                    onDec = { viewModel.decStrMod() },
+                    style = typography.bodyLarge,
+                    max = 5
+                )
+            }
+            if (item.itemType == ItemType.AMMUNITION) {
+                CounterWithText(
+                    counter = count.value,
+                    text = "Amount",
+                    onInc = { viewModel.incCount() },
+                    onDec = { viewModel.decCount() },
+                    style = typography.bodyLarge,
+                    min = 1
+                )
             }
             Spacer(modifier = Modifier.height(10.dp))
             DropdownList(
@@ -365,6 +395,8 @@ fun CalculationResultsBlock(
     item: Item
 ) {
     val masterwork = viewModel.masterwork.collectAsState()
+    val strMod = viewModel.strMod.collectAsState()
+    val count = viewModel.count.collectAsState()
     val mod = viewModel.modification.collectAsState()
     val discount = viewModel.discountTrait.collectAsState()
     val ignoredSkills = viewModel.ignoredSkills.collectAsState()
@@ -392,7 +424,8 @@ fun CalculationResultsBlock(
             text = "Final DC ${item.modifiedDifficultClassString(
                 masterwork.value,
                 mod.value,
-                dcForIgnoredPreqs
+                dcForIgnoredPreqs,
+                strMod.value
             )}",
             style = typography.titleMedium
         )
@@ -408,7 +441,12 @@ fun CalculationResultsBlock(
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "You must pay ${item.modifiedCraftCost(
-                mod.value, discount.value, masterwork.value).toCostString()}",
+                mod.value,
+                discount.value,
+                masterwork.value, 
+                strMod.value,
+                count.value
+            ).toCostString()}",
             style = typography.titleMedium
         )
         Spacer(modifier = Modifier.height(10.dp))

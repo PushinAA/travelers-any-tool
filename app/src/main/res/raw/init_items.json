@@ -6843,15 +6843,15 @@
         }
       },
       {
-        "name": "Shuriken (5)",
-        "marketCost": 100,
+        "name": "Shuriken",
+        "marketCost": 20,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
         "weight": 0.5,
         "slot": "NONE",
         "description": "A shuriken is a small piece of metal with sharpened edges, designed for throwing. A shuriken can’t be used as a melee weapon. Although they are thrown weapons, shuriken are treated as ammunition for the purposes of drawing them and crafting masterwork or otherwise special versions of them, and of what happens to them after they are thrown.",
-        "itemType": "RANGED_WEAPON",
+        "itemType": "AMMUNITION",
         "requirements": {
           "casterLevel": 0,
           "addPrep": "",
@@ -6963,8 +6963,8 @@
         }
       },
       {
-        "name": "Arrow, iron-tipped distance (20)",
-        "marketCost": 100,
+        "name": "Arrow, iron-tipped distance",
+        "marketCost": 5,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -6983,8 +6983,8 @@
         }
       },
       {
-        "name": "Arrows (20)",
-        "marketCost": 100,
+        "name": "Arrow",
+        "marketCost": 5,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7023,14 +7023,14 @@
         }
       },
       {
-        "name": "Bamboo shaft arrows",
-        "marketCost": 100,
+        "name": "Bamboo shaft arrow",
+        "marketCost": 10,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
         "weight": 0.5,
         "slot": "NONE",
-        "description": "These foot-long arrows are used as ammunition for arrow tubes. As an improvised melee weapon, they deal damage equivalent to that of a spiked gauntlet. They come in a bamboo tube that holds 10 shafts.",
+        "description": "These foot-long arrows are used as ammunition for arrow tubes. As an improvised melee weapon, they deal damage equivalent to that of a spiked gauntlet.",
         "itemType": "AMMUNITION",
         "requirements": {
           "casterLevel": 0,
@@ -7043,8 +7043,8 @@
         }
       },
       {
-        "name": "Barbed arrow (20)",
-        "marketCost": 200,
+        "name": "Barbed arrow",
+        "marketCost": 10,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7063,8 +7063,8 @@
         }
       },
       {
-        "name": "Barbed bolt (20)",
-        "marketCost": 200,
+        "name": "Barbed bolt",
+        "marketCost": 10,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7083,8 +7083,8 @@
         }
       },
       {
-        "name": "Blowgun darts (10)",
-        "marketCost": 50,
+        "name": "Blowgun darts",
+        "marketCost": 5,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7103,8 +7103,8 @@
         }
       },
       {
-        "name": "Blunt arrows (20)",
-        "marketCost": 200,
+        "name": "Blunt arrows",
+        "marketCost": 10,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7123,7 +7123,7 @@
         }
       },
       {
-        "name": "Bolas bolts",
+        "name": "Bolas bolt",
         "marketCost": 2000,
         "craftCost": 0,
         "casterLevel": 0,
@@ -7143,8 +7143,8 @@
         }
       },
       {
-        "name": "Bolts, heartstake (5)",
-        "marketCost": 10000,
+        "name": "Bolts, heartstake",
+        "marketCost": 2000,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7163,8 +7163,8 @@
         }
       },
       {
-        "name": "Bullets, groaning (10)",
-        "marketCost": 200,
+        "name": "Bullet, groaning",
+        "marketCost": 20,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7183,8 +7183,8 @@
         }
       },
       {
-        "name": "Crossbow bolts (10)",
-        "marketCost": 100,
+        "name": "Crossbow bolt",
+        "marketCost": 10,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7223,8 +7223,8 @@
         }
       },
       {
-        "name": "Flight arrows (20)",
-        "marketCost": 200,
+        "name": "Flight arrows",
+        "marketCost": 10,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7263,8 +7263,8 @@
         }
       },
       {
-        "name": "Halfling sharpstones (10)",
-        "marketCost": 100,
+        "name": "Halfling sharpstones",
+        "marketCost": 10,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7283,8 +7283,8 @@
         }
       },
       {
-        "name": "Halfling softstones (10)",
-        "marketCost": 10,
+        "name": "Halfling softstones",
+        "marketCost": 1,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7303,8 +7303,8 @@
         }
       },
       {
-        "name": "Halfling spongestones (10)",
-        "marketCost": 1000,
+        "name": "Halfling spongestones",
+        "marketCost": 100,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7323,8 +7323,8 @@
         }
       },
       {
-        "name": "Incendiary arrow (20)",
-        "marketCost": 1000,
+        "name": "Incendiary arrow",
+        "marketCost": 50,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7343,8 +7343,8 @@
         }
       },
       {
-        "name": "Incendiary bolt (20)",
-        "marketCost": 1000,
+        "name": "Incendiary bolt",
+        "marketCost": 50,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7363,8 +7363,8 @@
         }
       },
       {
-        "name": "Kestros dart (10)",
-        "marketCost": 500,
+        "name": "Kestros dart",
+        "marketCost": 50,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7383,8 +7383,8 @@
         }
       },
       {
-        "name": "Pronged arrow (20)",
-        "marketCost": 200,
+        "name": "Pronged arrow",
+        "marketCost": 10,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7403,8 +7403,8 @@
         }
       },
       {
-        "name": "Repeating crossbow bolts (5)",
-        "marketCost": 100,
+        "name": "Repeating crossbow bolts",
+        "marketCost": 20,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7423,8 +7423,8 @@
         }
       },
       {
-        "name": "Sling bullets (10)",
-        "marketCost": 10,
+        "name": "Sling bullets",
+        "marketCost": 1,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7503,8 +7503,8 @@
         }
       },
       {
-        "name": "Whistling arrows (20)",
-        "marketCost": 200,
+        "name": "Whistling arrows",
+        "marketCost": 10,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7627,8 +7627,8 @@
         }
       },
       {
-        "name": "Arrow, Pronged (20)",
-        "marketCost": 1500,
+        "name": "Arrow, Pronged",
+        "marketCost": 75,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",
@@ -7647,8 +7647,8 @@
         }
       },
       {
-        "name": "Bolt, Pronged (20)",
-        "marketCost": 1500,
+        "name": "Bolt, Pronged",
+        "marketCost": 75,
         "craftCost": 0,
         "casterLevel": 0,
         "aura": "",

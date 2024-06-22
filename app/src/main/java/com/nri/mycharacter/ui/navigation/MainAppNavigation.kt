@@ -1,5 +1,6 @@
 package com.nri.mycharacter.ui.navigation
 
+import android.content.res.Resources
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -14,11 +15,14 @@ import com.nri.mycharacter.ui.page.PrepareToCraftItemFromSpellPage
 import com.nri.mycharacter.ui.page.PrepareToCraftPage
 import com.nri.mycharacter.ui.page.SelectItemPage
 import com.nri.mycharacter.ui.page.SelectItemTypePage
+import com.nri.mycharacter.ui.page.StartScreen
 import com.nri.mycharacter.ui.page.StartingPage
 import com.nri.mycharacter.ui.page.admin.AdminFeatPage
 import com.nri.mycharacter.ui.page.admin.AdminPage
 
 sealed class MainAppRoutes(val route: String) {
+    object StartScreen: MainAppRoutes("start-screen")
+    object MainNav: MainAppRoutes("main-nav")
     object StartingPage: MainAppRoutes("start")
     object SelectItemType: MainAppRoutes("select-item-type")
     object SelectItem: MainAppRoutes("select")
@@ -31,6 +35,28 @@ sealed class AdminRoutes(val route: String) {
     object Admin: AdminRoutes("admin")
     object AdminMenu: AdminRoutes("admin-menu")
     object AdminFeats: AdminRoutes("admin-feats")
+}
+
+@Composable
+fun StartNav(
+    resources: Resources,
+    navController: NavHostController = rememberNavController(),
+    startDestination: String = MainAppRoutes.StartScreen.route
+) {
+    NavHost(
+        navController = navController,
+        startDestination = startDestination
+    ) {
+        composable(route = MainAppRoutes.StartScreen.route) {
+            StartScreen(resources = resources) {
+                navController.popBackStack()
+                navController.navigate(MainAppRoutes.MainNav.route)
+            }
+        }
+        composable(route = MainAppRoutes.MainNav.route) {
+            MainAppNav()
+        }
+    }
 }
 
 @Composable

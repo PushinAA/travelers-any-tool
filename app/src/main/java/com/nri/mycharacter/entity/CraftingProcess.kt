@@ -16,6 +16,7 @@ data class CraftingProcess (
     var timeSpent: Int = 0,
     var moneyCrafted: Int = 0,
     var masterwork: Boolean = false,
+    var count: Int = 1,
     var masterworkCrafted: Int = 0,
     var coopCraftingParts: Int = 0,
     var acceleratedCrafting: Boolean = false,

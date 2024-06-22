@@ -31,6 +31,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import androidx.navigation.compose.rememberNavController
 import com.nri.mycharacter.entity.ItemType
 import com.nri.mycharacter.service.CraftingProcessService
@@ -107,7 +108,14 @@ fun PrepareToCraftItemFromSpellPage(
         ) },
         onClick = {
             processService.createSpellTriggerItem(itemName.value, itemType, viewModel)
-            navHostController.navigate(MainAppRoutes.CraftingProcess.route)
+            navHostController.navigate(
+                MainAppRoutes.CraftingProcess.route,
+                NavOptions.Builder()
+                    .setPopUpTo(
+                        route = MainAppRoutes.StartingPage.route,
+                        inclusive = false
+                    ).build()
+            )
         },
         modifier = Modifier
             .requiredSize(170.dp, 50.dp)

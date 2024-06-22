@@ -54,45 +54,59 @@ enum class ItemSlot {
 }
 
 enum class ItemType(
+    val humanReadable: String,
     val isMundane: Boolean,
     val masterworkCost: Int = 0,
     val baseCraftSkill: List<CraftSkill> = listOf(APPROPRIATE),
     val masterworkDc: Int = 20,
     val baseFeats: List<String> = listOf()
 ) {
-    CLOTHING(true),
-    LIGHT_ARMOR(true, 15000, listOf(CRAFT_ARMOR)),
-    MEDIUM_ARMOR(true, 15000, listOf(CRAFT_ARMOR)),
-    HEAVY_ARMOR(true, 15000, listOf(CRAFT_ARMOR)),
-    SHIELD(true, 15000, listOf(CRAFT_ARMOR)),
-    AMMUNITION(true, 600, listOf(CRAFT_BOW, CRAFT_WEAPON)),
-    LIGHT_WEAPON(true, 30000, listOf(CRAFT_WEAPON)),
-    ONE_HANDED_WEAPON(true, 30000, listOf(CRAFT_WEAPON)),
-    TWO_HANDED_WEAPON(true, 30000, listOf(CRAFT_WEAPON)),
-    RANGED_WEAPON(true, 30000, listOf(CRAFT_BOW, CRAFT_WEAPON)),
-    SIEGE_ENGINE(true, 30000, listOf(CRAFT_SIEGE), 5),
-    ALCHEMICAL(isMundane = true, baseCraftSkill = listOf(CRAFT_ALCHEMY)),
-    WAND(isMundane = false, baseCraftSkill = listOf(
+    CLOTHING("Clothing", true),
+    LIGHT_ARMOR("Light armor", true, 15000, listOf(CRAFT_ARMOR)),
+    MEDIUM_ARMOR("Medium armor", true, 15000, listOf(CRAFT_ARMOR)),
+    HEAVY_ARMOR("Heavy armor", true, 15000, listOf(CRAFT_ARMOR)),
+    SHIELD("Shield", true, 15000, listOf(CRAFT_ARMOR)),
+    AMMUNITION("Ammunition", true, 600, listOf(CRAFT_BOW, CRAFT_WEAPON)),
+    LIGHT_WEAPON("Light weapon", true, 30000, listOf(CRAFT_WEAPON)),
+    ONE_HANDED_WEAPON("One-handed weapon", true, 30000, listOf(CRAFT_WEAPON)),
+    TWO_HANDED_WEAPON("Two-handed weapon", true, 30000, listOf(CRAFT_WEAPON)),
+    RANGED_WEAPON("Ranged weapon", true, 30000, listOf(CRAFT_BOW, CRAFT_WEAPON)),
+    SIEGE_ENGINE("Siege engine", true, 30000, listOf(CRAFT_SIEGE), 5),
+    ALCHEMICAL("Alchemical", isMundane = true, baseCraftSkill = listOf(CRAFT_ALCHEMY)),
+    WAND("Wand", isMundane = false, baseCraftSkill = listOf(
         SPELLCRAFT, CRAFT_JEWELRY, CRAFT_SCULPTURES, PROFESSION_WOODCUTTER),
         baseFeats = listOf("Craft Wand")
     ),
-    STAFF(isMundane = false, baseCraftSkill = listOf(
+    STAFF("Staff", isMundane = false, baseCraftSkill = listOf(
         SPELLCRAFT, CRAFT_JEWELRY, CRAFT_SCULPTURES, PROFESSION_WOODCUTTER)),
-    RING(isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_JEWELRY)),
-    WONDROUS_ITEM(isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, APPROPRIATE)),
-    ROD(isMundane = false, baseCraftSkill = listOf(
+    RING("Ring", isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_JEWELRY)),
+    WONDROUS_ITEM("Wondrous item", isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, APPROPRIATE)),
+    ROD("Rod", isMundane = false, baseCraftSkill = listOf(
         SPELLCRAFT, CRAFT_JEWELRY, CRAFT_SCULPTURES, CRAFT_WEAPON)),
-    POTION(isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_ALCHEMY),
+    POTION("Potion", isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_ALCHEMY),
         baseFeats = listOf("Brew Potion")),
-    SCROLL(isMundane = false, baseCraftSkill = listOf(
+    SCROLL("Scroll", isMundane = false, baseCraftSkill = listOf(
         SPELLCRAFT, CRAFT_CALLIGRAPHY, PROFESSION_SCRIBE),
         baseFeats = listOf("Scribe Scroll")),
-    MAGIC_WEAPON(isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_BOW, CRAFT_WEAPON)),
-    MAGIC_ARMOR(isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_ARMOR)),
-    MAGIC_SHIELD(isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_ARMOR)),
-    MAGIC_PLANT(false),
-    CONSTRUCT(false),
-    OTHER(true)
+    MAGIC_WEAPON("Magic weapon", isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_BOW, CRAFT_WEAPON)),
+    MAGIC_ARMOR("Magic armor", isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_ARMOR)),
+    MAGIC_SHIELD("Magic shield", isMundane = false, baseCraftSkill = listOf(SPELLCRAFT, CRAFT_ARMOR)),
+    MAGIC_PLANT("Magic plant", false),
+    CONSTRUCT("Construct", false),
+    OTHER("Other", true);
+
+    companion object {
+        private val TYPE_FILTER = listOf(
+            CLOTHING, WAND, POTION, SCROLL, MAGIC_PLANT, CONSTRUCT, OTHER
+        )
+
+        @JvmStatic
+        fun getTypes(): List<ItemType> {
+            return entries
+                .filterNot { TYPE_FILTER.contains(it) }
+                .sortedBy { it.ordinal }
+        }
+    }
 }
 
 class ItemSlotConverter : PropertyConverter<ItemSlot?, Int?> {

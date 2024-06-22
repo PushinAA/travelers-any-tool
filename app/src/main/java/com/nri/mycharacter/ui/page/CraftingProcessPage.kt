@@ -20,10 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.DateRange
-import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.sharp.Build
 import androidx.compose.material.icons.sharp.Check
 import androidx.compose.material.icons.sharp.KeyboardArrowDown
@@ -42,7 +39,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -215,7 +211,16 @@ fun CraftingProcessCard(
         val hoursSpent = remember { mutableIntStateOf(1) }
         val expandedMasterwork = remember { mutableStateOf(false) }
         Text(
-            text = processState.value.item.target.name ?: "",
+            text = "${
+                processState
+                    .value
+                    .item
+                    .target
+                    .name ?: ""
+            }${
+                if (processState.value.count > 1) " (${processState.value.count})"
+                else ""
+            }",
             style = typography.titleLarge,
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -451,7 +456,9 @@ fun CraftingProcessCard(
                                 .apply {
                                     doCraftMasterworkComponents(
                                         checkResult.intValue,
-                                        daysSpent.intValue
+                                        daysSpent.intValue,
+                                        adventuring.value,
+                                        byHours.value
                                     )
                                 }
                             craftingProcessService.save(processState.value)

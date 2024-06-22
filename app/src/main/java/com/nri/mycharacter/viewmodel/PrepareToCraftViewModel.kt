@@ -24,6 +24,8 @@ class PrepareToCraftViewModel: ViewModel() {
     private val _coopCraftingParticipants = MutableStateFlow(0)
     private val _fcb = MutableStateFlow(0)
     private val _masterwork = MutableStateFlow(false)
+    private val _strMod = MutableStateFlow(0)
+    private val _count = MutableStateFlow(1)
     private val _modification = MutableStateFlow<ItemModification?>(null)
     private val _ignoredSkills = MutableStateFlow<List<String>>(listOf())
     private val _ignoredFeats = MutableStateFlow<List<String>>(listOf())
@@ -34,10 +36,21 @@ class PrepareToCraftViewModel: ViewModel() {
     private val _spellLevel = MutableStateFlow(0)
     private val _casterLevel = MutableStateFlow(1)
 
+    val itemsWithStrMod = listOf(
+        "Composite longbow",
+        "Composite shortbow",
+        "Reflex bow",
+        "Spear-sling",
+        "Hornbow, orc",
+        "Horse bow"
+    )
+
     val discountTrait = _discountTrait.asStateFlow()
     val coopCraftingParticipants = _coopCraftingParticipants.asStateFlow()
     val fcb = _fcb.asStateFlow()
     val masterwork = _masterwork.asStateFlow()
+    val strMod = _strMod.asStateFlow()
+    val count = _count.asStateFlow()
     val modification = _modification.asStateFlow()
     val ignoredSkills = _ignoredSkills.asStateFlow()
     val ignoredFeats = _ignoredFeats.asStateFlow()
@@ -78,6 +91,22 @@ class PrepareToCraftViewModel: ViewModel() {
 
     fun updateMasterwork(value: Boolean) {
         _masterwork.update { _ -> value }
+    }
+
+    fun incStrMod() {
+        _strMod.update { it + 1 }
+    }
+
+    fun decStrMod() {
+        _strMod.update { it - 1 }
+    }
+
+    fun incCount() {
+        _count.update { it + 1 }
+    }
+
+    fun decCount() {
+        _count.update { it - 1 }
     }
 
     fun updateModification(value: ItemModification?) {
@@ -142,8 +171,19 @@ class PrepareToCraftViewModel: ViewModel() {
 
     fun collect(item: Item): CraftingProcess {
         val process = CraftingProcess(
-            finalCost = item.modifiedMarketCost(_modification.value, _masterwork.value),
-            mustPayed = item.modifiedCraftCost(_modification.value, _discountTrait.value, _masterwork.value),
+            finalCost = item.modifiedMarketCost(
+                _modification.value,
+                _masterwork.value,
+                _strMod.value,
+                _count.value
+            ),
+            mustPayed = item.modifiedCraftCost(
+                _modification.value,
+                _discountTrait.value,
+                _masterwork.value,
+                _strMod.value,
+                _count.value
+            ),
             finalDifficultClass = item.difficultClass(
                 _masterwork.value,
                 _modification.value,
@@ -154,10 +194,12 @@ class PrepareToCraftViewModel: ViewModel() {
                     _ignoredSpecial.value,
                     _ignoredCasterLevel.value,
                     _ignoredAlternativeChoices.value
-                )
+                ),
+                _strMod.value
             ),
             masterwork = _masterwork.value && (_modification.value == null ||
                     _modification.value?.isMasterworkIncluded != true),
+            count = _count.value,
             coopCraftingParts = _coopCraftingParticipants.value,
             fcb = _fcb.value,
             discountTrait = _discountTrait.value,

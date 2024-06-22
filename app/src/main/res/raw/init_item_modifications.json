@@ -159,7 +159,7 @@
       {
         "name": "Blackwood",
         "description": "Any wooden or mostly wooden item (such as a bow or quarterstaff) made from blackwood is considered a masterwork item and weighs only half as much as a normal wooden item of that type. Items not normally made of wood or only partially of wood (such as a battleaxe, mace, or other metal item with a wooden haft) either cannot be made from blackwood or do not gain any special benefit. The armor check penalty of a blackwood shield is reduced by 2 compared to an ordinary shield of its type. When wielded against creatures with the water subtype, mundane blackwood weapons ignore 1 point of the creature’s DR (if any), and enchanted blackwood weapons ignore a number of DR equal to 2 times the weapon’s enhancement bonus. To determine the price of a blackwood item, use the original weight but add 20 gp per pound to the price of a masterwork version of that item. Blackwood has 10 hit points per inch of thickness and hardness 7.",
-        "costMod": 20.0,
+        "costMod": 2000.0,
         "weightMod": 0.0,
         "difficultClassMod": 0,
         "isFlatCostMod": true,
@@ -277,7 +277,7 @@
       {
         "name": "Darkwood",
         "description": "This rare magic wood is as hard as normal wood but very light. Any wooden or mostly wooden item (such as a bow or spear) made from darkwood is considered a masterwork item and weighs only half as much as a normal wooden item of that type. Items not normally made of wood or only partially of wood (such as a battleaxe or a mace) either cannot be made from darkwood or do not gain any special benefit from being made of darkwood. The armor check penalty of a darkwood shield is lessened by 2 compared to an ordinary shield of its type. To determine the price of a darkwood item, use the original weight but add 10 gp per pound to the price of a masterwork version of that item. Darkwood has 10 hit points per inch of thickness and hardness 5.",
-        "costMod": 10.0,
+        "costMod": 1000.0,
         "weightMod": 0.0,
         "difficultClassMod": 0,
         "isFlatCostMod": false,
@@ -422,7 +422,7 @@
       {
         "name": "Greenwood",
         "description": "The secret of greenwood lies in its harvesting. Each length is taken, with leaves still attached, from a tree animated by a treant and cut with care to avoid the death of the tree. A dryad then speaks to and shapes the wood, coaxing the living green of the leaves into the grain of the wood itself. The resulting wood remains alive as long as it is doused with at least one gallon of water (plus 1 gallon for every 10 pounds of the item’s weight) once per week and allowed to rest for an hour in contact with fertile soil. Any wooden or mostly wooden item (such as a bow or spear) made from greenwood is considered a masterwork item. Items not normally made of wood or only partially of wood (such as a battleaxe or a mace) either cannot be made from greenwood or do not gain any special benefit from being made of greenwood.\n\nWhen damp and in contact with fertile soil, living greenwood heals damage to itself at a rate of 1 hit point per hour, even repairing breaks and regrowing missing pieces. If the weapon has the broken condition, it is repaired during the first hour of contact with fertile soil. Greenwood items take only one-quarter damage from fire.\n\nGreenwood can be altered or enhanced with wood-shaping magic such as ironwood, shape wood, and warp wood. The duration of any such effect on a greenwood item is doubled. To determine the price of a greenwood item, use the original weight but add 50 gp per pound to the price of a masterwork version of that item. Items made from darkwood cannot be made into greenwood.\n\nGreenwood has the same hit points and hardness as wood.",
-        "costMod": 50.0,
+        "costMod": 5000.0,
         "weightMod": 0.0,
         "difficultClassMod": 0,
         "isFlatCostMod": false,
@@ -504,7 +504,7 @@
       {
         "name": "Irespan Basalt",
         "description": "The Irespan’s stones are infused with a unique variant of Thassilonian preservative magic. Scholars suspect that these features have grown in the stones of the bridge over the ages since Earthfall, and were not originally intended or even anticipated by the structure’s architects. Bridge stones harvested from underwater rubble or mined from offshore pilings are not only of great value to builders and sculptors, but also of particular interest to those seeking to create stone constructs.\n\nPhysical Properties: Irespan basalt is as hard as iron, while retaining its other stony features for carving and building. It has hardness 10 and typically fetches a price of about 5 sp per pound. However, since few buyers are interested in stones of less than 1,000 pounds, the Irespan basalt trade is relatively limited to specialists capable of harvesting and transporting such heavy blocks.\n\nBuilding Constructs: When a construct’s materials consist entirely of Irespan stone, its Craft DC increases by +5, but the required Caster Level decreases by 1. In addition, stone constructs crafted from Irespan stone gain a +2 bonus to Strength and gain twice as many bonus hit points as normal from the construct type.",
-        "costMod": 50.0,
+        "costMod": 5000.0,
         "weightMod": 0.0,
         "difficultClassMod": 5,
         "casterLevelMod": -1,
@@ -637,7 +637,7 @@
       {
         "name": "Paueliel",
         "description": "Towering above most other trees, the lofty paueliel are widely held as the “first trees.” Lumberjacks superstitiously connect them to the fey races of the woodlands and, despite the strength of the wood, often avoid harvesting them. Nature enthusiasts revere them. These silver-barked hardwoods grow to immense heights, but never spread to more than a few feet in diameter. Stats: As darkwood but with hardness 7 and 150% as expensive.",
-        "costMod": 15.0,
+        "costMod": 1500.0,
         "weightMod": 0.0,
         "difficultClassMod": 0,
         "isFlatCostMod": false,
