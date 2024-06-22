@@ -208,7 +208,7 @@ fun CraftingProcessCard(
             mutableIntStateOf(process.finalDifficultClass)
         }
         val daysSpent = remember { mutableIntStateOf(1) }
-        val hoursSpent = remember { mutableIntStateOf(1) }
+        val hoursSpent = remember { mutableIntStateOf(4) }
         val expandedMasterwork = remember { mutableStateOf(false) }
         Text(
             text = "${
@@ -315,9 +315,11 @@ fun CraftingProcessCard(
             CounterWithText(
                 counter = hoursSpent.intValue,
                 text = "Hours spent",
-                onInc = { hoursSpent.intValue += 1 },
-                onDec = { hoursSpent.intValue -= 1 },
+                onInc = { hoursSpent.intValue += 4 },
+                onDec = { hoursSpent.intValue -= 4 },
                 modifier = Modifier.padding(start = 5.dp),
+                min = 4,
+                max = 8,
                 style = typography.bodyLarge
             )
         } else {

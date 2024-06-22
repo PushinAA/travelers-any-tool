@@ -291,7 +291,7 @@ fun CraftingProcess.doCraft(
         timeSpent += if (byHours) {
             hoursSpent
         } else {
-            daysSpent * 24
+            daysSpent * 8
         }
         return
     }
@@ -300,7 +300,7 @@ fun CraftingProcess.doCraft(
             .times(checkResult)
             .div(7)
             .div(24)
-            .times(if (byHours) hoursSpent else daysSpent * 24)
+            .times(if (byHours) hoursSpent else daysSpent * 8)
             .times(10)
     } else {
         100000.0
@@ -321,7 +321,7 @@ fun CraftingProcess.doCraft(
     timeSpent += if (byHours) {
         hoursSpent
     } else {
-        daysSpent * 24
+        daysSpent * 8
     }
 }
 
