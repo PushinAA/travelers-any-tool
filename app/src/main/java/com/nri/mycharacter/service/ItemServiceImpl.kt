@@ -3,6 +3,7 @@ package com.nri.mycharacter.service
 import com.nri.mycharacter.entity.Item
 import com.nri.mycharacter.entity.Item_
 import com.nri.mycharacter.store.ObjectBox
+import io.objectbox.query.QueryBuilder
 import org.koin.core.component.KoinComponent
 
 class ItemServiceImpl: ItemService, KoinComponent {
@@ -24,7 +25,7 @@ class ItemServiceImpl: ItemService, KoinComponent {
         val queryBuilder = itemBox.query()
         if (filter.name.isNotBlank()) {
             queryBuilder
-                .apply(Item_.name.contains(filter.name))
+                .apply(Item_.name.contains(filter.name, QueryBuilder.StringOrder.CASE_INSENSITIVE))
         }
         queryBuilder
             .apply(Item_.itemType.oneOf(filter.types.map { it.ordinal }.toIntArray()))

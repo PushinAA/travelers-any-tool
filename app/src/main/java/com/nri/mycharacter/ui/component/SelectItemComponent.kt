@@ -34,15 +34,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.toMutableStateList
 import androidx.compose.runtime.toMutableStateMap
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -58,7 +56,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.compose.KoinApplication
 import org.koin.compose.koinInject
 import org.koin.dsl.module
-import java.util.Comparator
 
 @Composable
 fun SelectItem(
@@ -72,6 +69,7 @@ fun SelectItem(
             .toList()
             .toMutableStateMap()
     }
+    val config = LocalConfiguration.current
     Box {
         Column {
             FilterInput(value = itemName.value) {
@@ -80,7 +78,7 @@ fun SelectItem(
             LazyColumn(
                 modifier = Modifier
                     .verticalScroll(ScrollState(0))
-                    .height(750.dp)
+                    .height((config.screenHeightDp + 50).dp)
             ) {
                 val items = itemService.findFiltered(
                     ItemFilter(
@@ -101,13 +99,15 @@ fun SelectItem(
                 }
             }
         }
+        val xOffset = config.screenWidthDp * 0.4
+        val yOffset = config.screenHeightDp * 0.35
         Column(
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.End,
             modifier = Modifier
                 .height(500.dp)
                 .width(200.dp)
-                .offset(160.dp, 220.dp)
+                .offset(xOffset.dp, yOffset.dp)
         ) {
             val expanded = remember { mutableStateOf(false) }
             if (expanded.value) {
@@ -227,7 +227,8 @@ fun ItemContainer(
                 Text(
                     text = item.name!!,
                     style = typography.bodyLarge,
-                    modifier = Modifier.padding(4.dp)
+                    modifier = Modifier.padding(4.dp),
+                    color = MaterialTheme.colorScheme.onSecondary
                 )
             }
         }
